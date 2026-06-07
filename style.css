@@ -879,6 +879,16 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
   box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
 }
+.bnav-svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
 .bnav-item {
   flex: 1;
   display: flex;
@@ -893,7 +903,6 @@ body {
   min-height: 56px;
 }
 .bnav-item.active { color: var(--accent); }
-.bnav-icon { font-size: 1.3rem; line-height: 1; }
 .bnav-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
 
 /* ===== RESPONSIVE ===== */
