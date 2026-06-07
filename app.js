@@ -1,3 +1,20 @@
+// ===== THEME =====
+function toggleTheme() {
+  const isDark = document.body.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-toggle').textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
+}
+function applyTheme() {
+  const saved = localStorage.getItem('theme');
+  const btn = document.getElementById('theme-toggle');
+  if (saved === 'dark') {
+    document.body.classList.add('dark');
+    if (btn) btn.textContent = '☀️ Светлая тема';
+  } else {
+    if (btn) btn.textContent = '🌙 Тёмная тема';
+  }
+}
+
 // ===== STATE =====
 let state = {
   progress: {},       // { wordId: { interval, nextReview, reps, easeFactor } }
@@ -34,6 +51,7 @@ let timers = {
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
+  applyTheme();
   loadState();
   checkStreak();
   initFirebase();
