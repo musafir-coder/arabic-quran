@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arabic Quran — Учи арабский через Коран</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== SIDEBAR NAV ===== -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-ar">بِسْمِ اللَّه</span>
+    <span class="logo-ru">Arabic Quran</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="nav-link active" data-page="dashboard">
+      <span class="nav-icon">◈</span> Главная
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="lesson">
+      <span class="nav-icon">◉</span> Урок дня
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="flashcards">
+      <span class="nav-icon">◧</span> Карточки
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="words">
+      <span class="nav-icon">≡</span> Все слова
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="quiz">
+      <span class="nav-icon">◎</span> Тест
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="islands">
+      <span class="nav-icon">✦</span> Мои острова
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="plan">
+      <span class="nav-icon">◈</span> План
+    </a></li>
+    <li><a href="#" class="nav-link" data-page="leaderboard">
+      <span class="nav-icon">🏆</span> Рейтинг
+    </a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <div class="streak-badge">
+      <span class="streak-fire">🔥</span>
+      <span id="streak-count">0</span> дней подряд
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MOBILE HEADER ===== -->
+<header class="mobile-header">
+  <button class="menu-btn" id="menu-btn">☰</button>
+  <span class="mobile-logo">Arabic Quran</span>
+  <div class="mobile-streak">🔥 <span id="streak-mobile">0</span></div>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content" id="main-content">
+
+  <!-- DASHBOARD -->
+  <section class="page active" id="page-dashboard">
+    <div class="page-header">
+      <h1>Ассаляму Алейкум 👋</h1>
+      <p class="page-subtitle">Сегодня <span id="today-date"></span> — день изучения арабского</p>
+    </div>
+
+    <!-- Daily Progress -->
+    <div class="daily-session">
+      <h2 class="section-title">Сегодняшние 45 минут</h2>
+      <div class="sessions-grid">
+        <div class="session-card" id="sess-1" data-page="flashcards">
+          <div class="session-num">15 мин</div>
+          <div class="session-icon">📖</div>
+          <div class="session-name">Новые слова</div>
+          <div class="session-desc">Учи слова во фразах</div>
+          <div class="session-status" id="s1-status">Не начат</div>
+          <button class="btn-start" onclick="navigate('flashcards')">Начать →</button>
+        </div>
+        <div class="session-card" id="sess-2" data-page="listen">
+          <div class="session-num">15 мин</div>
+          <div class="session-icon">🎧</div>
+          <div class="session-name">Слушать</div>
+          <div class="session-desc">Коран и лекции на арабском</div>
+          <div class="session-status" id="s2-status">Не начат</div>
+          <button class="btn-start" onclick="navigate('listen')">Начать →</button>
+        </div>
+        <div class="session-card" id="sess-3" data-page="islands">
+          <div class="session-num">15 мин</div>
+          <div class="session-icon">✍️</div>
+          <div class="session-name">Языковые острова</div>
+          <div class="session-desc">Пиши свои предложения</div>
+          <div class="session-status" id="s3-status">Не начат</div>
+          <button class="btn-start" onclick="navigate('islands')">Начать →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-learned">0</div>
+        <div class="stat-label">Слов выучено</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-streak">0</div>
+        <div class="stat-label">Дней подряд</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-due">0</div>
+        <div class="stat-label">К повторению</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-total">1000</div>
+        <div class="stat-label">Всего слов</div>
+      </div>
+    </div>
+
+    <!-- Word of the Day -->
+    <div class="word-of-day">
+      <h2 class="section-title">Слово дня</h2>
+      <div class="wod-card" id="wod-card">
+        <div class="wod-arabic" id="wod-arabic">بِسْمِ اللَّهِ</div>
+        <div class="wod-trans" id="wod-trans">bismillāh</div>
+        <div class="wod-ru" id="wod-ru">во имя Аллаха</div>
+        <div class="wod-example" id="wod-example">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+        <div class="wod-example-ru" id="wod-example-ru">Во имя Аллаха Милостивого Милосердного</div>
+        <div class="wod-source" id="wod-source">Коран 1:1</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-section">
+      <h2 class="section-title">Прогресс к 1000 словам</h2>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="progress-learned-num">0</span> / 1000 слов
+        <span class="progress-percent" id="progress-pct">0%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSON PAGE -->
+  <section class="page" id="page-lesson">
+    <div class="page-header">
+      <h1>Урок дня</h1>
+      <p class="page-subtitle">Методика полиглота: 45 минут = 3 блока по 15 минут</p>
+    </div>
+    <div class="lesson-blocks">
+      <div class="lesson-block">
+        <div class="lb-header">
+          <span class="lb-time">Блок 1 · 15 минут</span>
+          <h3>📖 Слова во фразах</h3>
+        </div>
+        <p>Сегодняшние слова из Корана и хадисов. Учи каждое слово в контексте предложения — так запоминается быстрее.</p>
+        <div class="lesson-words-preview" id="lesson-words-preview"></div>
+        <button class="btn-primary" onclick="navigate('flashcards')">Начать карточки →</button>
+      </div>
+      <div class="lesson-block">
+        <div class="lb-header">
+          <span class="lb-time">Блок 2 · 15 минут</span>
+          <h3>🎧 Слушать Коран</h3>
+        </div>
+        <p>Слушай арабский каждый день. Мозг фиксирует слова, которые ты уже выучил, в живой речи.</p>
+        <button class="btn-primary" onclick="navigate('listen')">Перейти к слушанию →</button>
+      </div>
+      <div class="lesson-block">
+        <div class="lb-header">
+          <span class="lb-time">Блок 3 · 15 минут</span>
+          <h3>✍️ Языковые острова</h3>
+        </div>
+        <p>Напиши 5-10 предложений о себе, своей жизни и вере на арабском. Читай их вслух.</p>
+        <button class="btn-primary" onclick="navigate('islands')">Писать предложения →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS PAGE -->
+  <section class="page" id="page-flashcards">
+    <div class="page-header">
+      <h1>Карточки слов</h1>
+      <div class="fc-controls">
+        <span id="fc-counter">0 / 0</span>
+        <span id="fc-session-time">⏱ 15:00</span>
+      </div>
+    </div>
+
+    <div class="flashcard-wrap" id="flashcard-wrap">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="card-front" id="card-front">
+          <div class="card-cat" id="card-cat"></div>
+          <div class="card-arabic" id="card-arabic">اللَّه</div>
+          <div class="card-source" id="card-source"></div>
+          <div class="card-hint">Нажми, чтобы увидеть перевод</div>
+        </div>
+        <div class="card-back" id="card-back">
+          <div class="card-trans" id="card-trans"></div>
+          <div class="card-ru" id="card-ru"></div>
+          <div class="card-example-ar" id="card-example-ar"></div>
+          <div class="card-example-ru" id="card-example-ru"></div>
+          <div class="card-memo" id="card-memo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rating-btns" id="rating-btns" style="display:none">
+      <button class="btn-rate again" onclick="rateCard('again')">Не знал<br><small>снова через 1 мин</small></button>
+      <button class="btn-rate hard" onclick="rateCard('hard')">Сложно<br><small>через 1 день</small></button>
+      <button class="btn-rate good" onclick="rateCard('good')">Знаю<br><small>через 3 дня</small></button>
+      <button class="btn-rate easy" onclick="rateCard('easy')">Легко<br><small>через 7 дней</small></button>
+    </div>
+
+    <div class="fc-done" id="fc-done" style="display:none">
+      <div class="done-icon">✅</div>
+      <h2>Блок 1 завершён!</h2>
+      <p>Ты выучил <strong id="done-count">0</strong> слов сегодня</p>
+      <button class="btn-primary" onclick="navigate('listen')">Перейти к блоку 2: Слушать →</button>
+    </div>
+  </section>
+
+  <!-- WORD LIST PAGE -->
+  <section class="page" id="page-words">
+    <div class="page-header">
+      <h1>Все слова</h1>
+      <p class="page-subtitle">1000 самых частых слов Корана и Сахих Бухари</p>
+    </div>
+    <div class="words-controls">
+      <input type="text" class="search-input" id="word-search" placeholder="Поиск по арабскому или переводу..." oninput="filterWords()">
+      <div class="cat-filters" id="cat-filters"></div>
+    </div>
+    <div class="words-table" id="words-table"></div>
+  </section>
+
+  <!-- QUIZ PAGE -->
+  <section class="page" id="page-quiz">
+    <div class="page-header">
+      <h1>Тест</h1>
+      <p class="page-subtitle">Переведи арабское слово на русский</p>
+    </div>
+    <div class="quiz-wrap" id="quiz-wrap">
+      <div class="quiz-progress"><span id="quiz-q-num">1</span> / <span id="quiz-total">10</span></div>
+      <div class="quiz-word" id="quiz-word"></div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-result" id="quiz-result" style="display:none"></div>
+    </div>
+    <div class="quiz-end" id="quiz-end" style="display:none">
+      <div class="done-icon">🏆</div>
+      <h2>Тест завершён!</h2>
+      <p><strong id="quiz-score">0</strong> правильных из <strong id="quiz-out-of">10</strong></p>
+      <button class="btn-primary" onclick="startQuiz()">Ещё раз</button>
+    </div>
+  </section>
+
+  <!-- LANGUAGE ISLANDS PAGE -->
+  <section class="page" id="page-islands">
+    <div class="page-header">
+      <h1>✍️ Языковые острова</h1>
+      <p class="page-subtitle">15 минут · Пиши предложения о себе на арабском</p>
+    </div>
+    <div class="islands-wrap">
+      <div class="islands-tip">
+        <strong>Как это работает:</strong> Напиши 5-10 предложений о своей жизни, вере, интересах. Не из учебника — свои, живые. Потом читай вслух и переводи с русского на арабский.
+      </div>
+      <div class="island-input-wrap">
+        <div class="island-row">
+          <input type="text" class="island-ru-input" placeholder="Напиши по-русски..." id="island-ru">
+          <input type="text" class="island-ar-input" placeholder="Напиши по-арабски..." id="island-ar" dir="rtl">
+          <button class="btn-island-add" onclick="addIsland()">+</button>
+        </div>
+      </div>
+      <div class="islands-list" id="islands-list"></div>
+
+      <div class="islands-examples">
+        <h3>Примеры предложений для начала:</h3>
+        <div class="example-sentences">
+          <div class="ex-sent" onclick="fillIsland('Я мусульманин', 'أَنَا مُسْلِمٌ')">
+            <span class="ex-ar">أَنَا مُسْلِمٌ</span>
+            <span class="ex-ru">Я мусульманин</span>
+          </div>
+          <div class="ex-sent" onclick="fillIsland('Я изучаю арабский язык', 'أَنَا أَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ')">
+            <span class="ex-ar">أَنَا أَتَعَلَّمُ اللُّغَةَ الْعَرَبِيَّةَ</span>
+            <span class="ex-ru">Я изучаю арабский язык</span>
+          </div>
+          <div class="ex-sent" onclick="fillIsland('Аллах — мой Господь', 'اللَّهُ رَبِّي')">
+            <span class="ex-ar">اللَّهُ رَبِّي</span>
+            <span class="ex-ru">Аллах — мой Господь</span>
+          </div>
+          <div class="ex-sent" onclick="fillIsland('Я читаю Коран каждый день', 'أَقْرَأُ الْقُرْآنَ كُلَّ يَوْمٍ')">
+            <span class="ex-ar">أَقْرَأُ الْقُرْآنَ كُلَّ يَوْمٍ</span>
+            <span class="ex-ru">Я читаю Коран каждый день</span>
+          </div>
+          <div class="ex-sent" onclick="fillIsland('Я совершаю пять молитв', 'أُصَلِّي خَمْسَ صَلَوَاتٍ')">
+            <span class="ex-ar">أُصَلِّي خَمْسَ صَلَوَاتٍ</span>
+            <span class="ex-ru">Я совершаю пять молитв</span>
+          </div>
+          <div class="ex-sent" onclick="fillIsland('Аллах прощает грехи', 'اللَّهُ يَغْفِرُ الذُّنُوبَ')">
+            <span class="ex-ar">اللَّهُ يَغْفِرُ الذُّنُوبَ</span>
+            <span class="ex-ru">Аллах прощает грехи</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="islands-timer-section">
+        <button class="btn-timer" id="island-timer-btn" onclick="toggleIslandTimer()">▶ Запустить таймер 15 мин</button>
+        <div class="timer-display" id="island-timer">15:00</div>
+      </div>
+    </div>
+    <div class="session-complete" id="islands-complete" style="display:none">
+      <div class="done-icon">✅</div>
+      <h2>Блок 3 завершён! Маша Аллах!</h2>
+      <p>Ты прошёл все 45 минут сегодняшнего урока.</p>
+      <button class="btn-primary" onclick="markDayComplete()">Отметить день ✓</button>
+    </div>
+  </section>
+
+  <!-- LISTEN PAGE -->
+  <section class="page" id="page-listen">
+    <div class="page-header">
+      <h1>🎧 Слушать арабский</h1>
+      <p class="page-subtitle">15 минут · Слушай каждый день с первого дня</p>
+    </div>
+    <div class="listen-wrap">
+
+      <div class="listen-tip">
+        Слушай истории пророков на чистой фусха — ты будешь узнавать слова из своего курса в живой речи. Не нужно понимать всё, продолжай слушать.
+      </div>
+
+      <div class="listen-timer-row">
+        <button class="btn-timer" id="listen-timer-btn" onclick="toggleListenTimer()">▶ Запустить таймер 15 мин</button>
+        <div class="timer-display" id="listen-timer">15:00</div>
+      </div>
+
+      <h3 class="section-title">تلاوات قرآنية — VideoKoran</h3>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px">Чтение Корана · красивые голоса · слушай и узнавай свои слова</p>
+
+      <div class="listen-links">
+        <a class="listen-card" href="https://www.youtube.com/watch?v=kV24ttRjKGQ" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/kV24ttRjKGQ/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة الواقعة (٥٦)</div>
+            <div class="listen-ru">Сура Аль-Вакиа — Событие</div>
+            <div class="listen-note">يوم · جنة · نار · خلق · ماء · رزق · الله</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=UVzbB8RjSbc" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/UVzbB8RjSbc/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة مريم (١٩)</div>
+            <div class="listen-ru">Сура Марьям</div>
+            <div class="listen-note">مريم · يحيى · زكريا · عيسى · كلمة · روح · رب</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=dH3uGjOrV64" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/dH3uGjOrV64/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة الملك (٦٧)</div>
+            <div class="listen-ru">Сура Аль-Мульк — Власть</div>
+            <div class="listen-note">ملك · خلق · رزق · حياة · موت · رحمة · عذاب</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=sZKJ2uTv5tI" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/sZKJ2uTv5tI/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة الزمر (٣٩) — ٤٩-٧٠</div>
+            <div class="listen-ru">Сура Аз-Зумар — Толпы</div>
+            <div class="listen-note">قل · إله · رب · يوم · موت · توبة · مغفرة</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=iiKZ-LJg6Xs" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/iiKZ-LJg6Xs/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">تلاوة قرآنية — طفل</div>
+            <div class="listen-ru">Красивое чтение — мальчик</div>
+            <div class="listen-note">الله · رحمن · رحيم · رب · إياك · نعبد</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=wYVfe3r0Em4" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/wYVfe3r0Em4/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">تلاوة قرآنية جميلة</div>
+            <div class="listen-ru">Красивое чтение Священного Корана</div>
+            <div class="listen-note">الله · رحمن · رحيم · خلق · أمر · رزق · رحمة</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=k8J-ywwkXEY" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/k8J-ywwkXEY/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة الأنعام (٦) — ٢٢-٣٦</div>
+            <div class="listen-ru">Сура Аль-Анам — Файсал ар-Рушуд</div>
+            <div class="listen-note">الله · خلق · إله · رب · نور · قوم · آية · أمر</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=P6r9mdLC1MI" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/P6r9mdLC1MI/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة ق (٥٠) — ١٦-٤٥</div>
+            <div class="listen-ru">Сура Каф — Мансур Мухийдин</div>
+            <div class="listen-note">قلب · يوم · رقيب · عتيد · موت · رزق · قيامة</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=MA8DoPT1B-0" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/MA8DoPT1B-0/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة هود (١١) — ٨٤-١٢٣</div>
+            <div class="listen-ru">Сура Худ — Файсал ар-Рушуд</div>
+            <div class="listen-note">رسول · قوم · عذاب · توبة · أمر · رب · ظلم</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=t9-6T6E2jYg" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/t9-6T6E2jYg/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة إبراهيم (١٤)</div>
+            <div class="listen-ru">Сура Ибрахим — Файсал ар-Рушуд</div>
+            <div class="listen-note">إبراهيم · رب · شكر · كفر · نعمة · يوم · دعاء</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=qM9YxGVTQSQ" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/qM9YxGVTQSQ/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">سورة غافر (٤٠)</div>
+            <div class="listen-ru">Сура Гафир — Прощающий</div>
+            <div class="listen-note">غافر · ذنب · توبة · عقاب · ملك · يوم · رزق</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+      </div>
+
+      <h3 class="section-title">قصص الأنبياء — نبيل العوضي</h3>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px">Истории пророков · Набиль Аль-Авади · Классическая фусха</p>
+
+      <div class="listen-links">
+        <a class="listen-card" href="https://www.youtube.com/watch?v=G5sO3nBi-gM" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/G5sO3nBi-gM/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">قصة إبراهيم عليه السلام</div>
+            <div class="listen-ru">История Ибрагима</div>
+            <div class="listen-note">نبي · رسول · قوم · إيمان · نار · أمر · ولد</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=YK5-JeIQZ94" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/YK5-JeIQZ94/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">قصة نوح عليه السلام</div>
+            <div class="listen-ru">История Нуха</div>
+            <div class="listen-note">سفينة · قوم · رسول · عذاب · رحمة · ماء · كفر</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=Aw4FLH5c6dM" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/Aw4FLH5c6dM/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">قصة موسى عليه السلام</div>
+            <div class="listen-ru">История Мусы</div>
+            <div class="listen-note">آية · رسول · قال · أمر · خرج · بحر · قوم · ملك</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=_6x5vQpBndQ" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/_6x5vQpBndQ/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">قصة يوسف عليه السلام</div>
+            <div class="listen-ru">История Юсуфа</div>
+            <div class="listen-note">رأى · أخ · ملك · رجع · علم · صبر · توكل · رحمة</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+        <a class="listen-card" href="https://www.youtube.com/watch?v=DzsYjdntMrU" target="_blank">
+          <img class="listen-thumb" src="https://img.youtube.com/vi/DzsYjdntMrU/mqdefault.jpg" alt="">
+          <div class="listen-card-body">
+            <div class="listen-ar">قصة عيسى وزكريا ومريم</div>
+            <div class="listen-ru">История Исы, Закарии и Марьям</div>
+            <div class="listen-note">نبي · روح · كلمة · ولد · آية · عبد · دعاء · رحمة</div>
+          </div>
+          <span class="listen-go">▶</span>
+        </a>
+      </div>
+
+      <div class="session-done-row">
+        <button class="btn-primary" onclick="markListenDone()">✓ Завершить блок 2</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN PAGE -->
+  <section class="page" id="page-plan">
+    <div class="page-header">
+      <h1>План обучения</h1>
+      <p class="page-subtitle">По методике полиглота: 45 мин/день → владение языком за 6 месяцев</p>
+    </div>
+    <div class="plan-wrap">
+      <div class="phase-card" id="phase-1">
+        <div class="phase-header">
+          <span class="phase-badge">Этап 1</span>
+          <h3>1000 слов Корана и Сунны</h3>
+          <span class="phase-duration">Месяцы 1-2 · ~60 дней</span>
+        </div>
+        <p>Выучи 1000 самых частых слов Корана и Сахих Бухари. Не изолированно — в аятах и хадисах.</p>
+        <ul class="plan-list">
+          <li>📖 15 мин/день — карточки слов (15-20 новых слов)</li>
+          <li>🎧 15 мин/день — слушать суры Корана</li>
+          <li>✍️ 15 мин/день — писать предложения о себе</li>
+          <li>Цель: понимать 80% текста Корана</li>
+        </ul>
+        <div class="phase-progress">
+          <div class="phase-bar"><div class="phase-fill" id="phase1-fill" style="width:0%"></div></div>
+          <span id="phase1-pct">0%</span>
+        </div>
+      </div>
+
+      <div class="phase-card" id="phase-2">
+        <div class="phase-header">
+          <span class="phase-badge">Этап 2</span>
+          <h3>Специализированная лексика</h3>
+          <span class="phase-duration">Месяцы 3-4</span>
+        </div>
+        <p>После 1000 слов — переходи к теме, которая тебе интересна. Для тебя это: тафсир, хадисы, исламская история.</p>
+        <ul class="plan-list">
+          <li>📚 Читать тафсир на арабском</li>
+          <li>🎙 Слушать уроки арабских шейхов</li>
+          <li>💬 Переводить хадисы самостоятельно</li>
+        </ul>
+      </div>
+
+      <div class="phase-card" id="phase-3">
+        <div class="phase-header">
+          <span class="phase-badge">Этап 3</span>
+          <h3>Говорение и понимание</h3>
+          <span class="phase-duration">Месяцы 5-6</span>
+        </div>
+        <p>Говорение — отдельный навык. Тренируй его ежедневно с первого месяца.</p>
+        <ul class="plan-list">
+          <li>🗣 Говори сам с собой по-арабски</li>
+          <li>📝 30 предложений в день — о своей жизни</li>
+          <li>🔁 Переводи с русского на арабский без подсказок</li>
+          <li>🎯 Цель: читать Коран с пониманием</li>
+        </ul>
+      </div>
+
+      <div class="daily-routine">
+        <h3>Ежедневная рутина (45 минут)</h3>
+        <div class="routine-table">
+          <div class="routine-row header">
+            <span>Блок</span><span>Время</span><span>Что делать</span>
+          </div>
+          <div class="routine-row">
+            <span class="r-num">1</span>
+            <span class="r-time">15 мин</span>
+            <span>Новые слова во фразах из Корана. Придумывай яркую ассоциацию для каждого.</span>
+          </div>
+          <div class="routine-row">
+            <span class="r-num">2</span>
+            <span class="r-time">15 мин</span>
+            <span>Слушай Коран или арабский подкаст. Не понимаешь — нормально, продолжай.</span>
+          </div>
+          <div class="routine-row">
+            <span class="r-num">3</span>
+            <span class="r-time">15 мин</span>
+            <span>Пиши 5-10 предложений. Читай вслух. Переводи с русского на арабский.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD PAGE -->
+  <section class="page" id="page-leaderboard">
+    <div class="page-header">
+      <h1>🏆 Рейтинг</h1>
+      <p class="page-subtitle">Кто сколько слов выучил</p>
+    </div>
+    <div class="lb-wrap">
+      <div class="lb-list" id="lb-list">
+        <div class="lb-loading">Загрузка...</div>
+      </div>
+      <p class="lb-hint">Рейтинг обновляется каждый раз когда кто-то занимается</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- NAME MODAL -->
+<div class="name-overlay" id="name-overlay" style="display:none">
+  <div class="name-box">
+    <div class="name-logo">🌙</div>
+    <h2 class="name-title">Как тебя зовут?</h2>
+    <p class="name-sub">Имя появится в таблице лидеров</p>
+    <input type="text" id="name-input" class="name-input" placeholder="Введи имя..." maxlength="20" autocomplete="off"
+      onkeydown="if(event.key==='Enter') submitName()">
+    <button class="btn-primary" onclick="submitName()">Начать изучение →</button>
+  </div>
+</div>
+
+<!-- TIMER OVERLAY -->
+<div class="timer-overlay" id="timer-overlay" style="display:none">
+  <div class="timer-big" id="timer-big">15:00</div>
+  <div class="timer-label" id="timer-label">Блок 1: Слова</div>
+  <button class="btn-timer-stop" onclick="stopOverlayTimer()">Остановить</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firebase-sync.js"></script>
+<script src="words.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
