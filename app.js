@@ -140,11 +140,14 @@ function showPage(page) {
 function initMobileMenu() {
   const btn = document.getElementById('menu-btn');
   if (btn) btn.addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
+    const isOpen = document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay-darkener').classList.toggle('show', isOpen);
   });
 }
 function closeMobileMenu() {
   document.getElementById('sidebar').classList.remove('open');
+  const od = document.getElementById('overlay-darkener');
+  if (od) od.classList.remove('show');
 }
 
 // ===== DASHBOARD =====
