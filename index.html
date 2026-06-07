@@ -2,8 +2,14 @@
 <html lang="ru" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Arabic Quran — Учи арабский через Коран</title>
+  <meta name="theme-color" content="#6c5ce7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Arabic Quran">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -613,11 +619,42 @@
   <button class="btn-timer-stop" onclick="stopOverlayTimer()">Остановить</button>
 </div>
 
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav" id="bottom-nav">
+  <a href="#" class="bnav-item active" data-page="dashboard">
+    <span class="bnav-icon">🏠</span>
+    <span class="bnav-label">Главная</span>
+  </a>
+  <a href="#" class="bnav-item" data-page="flashcards">
+    <span class="bnav-icon">📖</span>
+    <span class="bnav-label">Карточки</span>
+  </a>
+  <a href="#" class="bnav-item" data-page="words">
+    <span class="bnav-icon">📋</span>
+    <span class="bnav-label">Слова</span>
+  </a>
+  <a href="#" class="bnav-item" data-page="listen">
+    <span class="bnav-icon">🎧</span>
+    <span class="bnav-label">Слушать</span>
+  </a>
+  <a href="#" class="bnav-item" data-page="leaderboard">
+    <span class="bnav-icon">🏆</span>
+    <span class="bnav-label">Рейтинг</span>
+  </a>
+</nav>
+
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="firebase-sync.js"></script>
 <script src="words.js"></script>
 <script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/arabic-quran/sw.js').catch(() => {});
+    });
+  }
+</script>
 </body>
 </html>

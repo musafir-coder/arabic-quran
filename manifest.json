@@ -1,0 +1,20 @@
+{
+  "name": "Arabic Quran",
+  "short_name": "عربي",
+  "description": "Учи арабский язык через Коран",
+  "start_url": "/arabic-quran/",
+  "scope": "/arabic-quran/",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#6c5ce7",
+  "orientation": "portrait-primary",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
