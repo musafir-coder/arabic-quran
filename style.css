@@ -876,8 +876,10 @@ body {
   background: var(--bg2);
   border-top: 1px solid var(--border);
   z-index: 200;
-  padding-bottom: env(safe-area-inset-bottom);
   box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 .bnav-svg {
   width: 22px;
@@ -928,7 +930,7 @@ body {
   .mobile-header { display: flex; }
   .main-content {
     margin-left: 0;
-    padding: 68px 14px calc(72px + env(safe-area-inset-bottom));
+    padding: 68px 14px calc(80px + env(safe-area-inset-bottom, 0px));
   }
   .sessions-grid { grid-template-columns: 1fr; gap: 10px; }
   .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
