@@ -1,4 +1,4 @@
-const CACHE = 'arabic-quran-v1';
+const CACHE = 'arabic-quran-v2';
 const ASSETS = [
   '/arabic-quran/',
   '/arabic-quran/index.html',
