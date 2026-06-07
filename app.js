@@ -1,3 +1,15 @@
+// ===== RESET PROGRESS =====
+function resetProgress() {
+  if (!confirm('Сбросить весь прогресс? Это нельзя отменить.')) return;
+  state.progress = {};
+  state.streak = 0;
+  state.todaySessions = { s1: false, s2: false, s3: false };
+  state.dayComplete = false;
+  saveState();
+  syncToFirebase();
+  location.reload();
+}
+
 // ===== THEME =====
 function toggleTheme() {
   const isDark = document.body.classList.toggle('dark');

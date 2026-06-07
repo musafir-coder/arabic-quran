@@ -988,6 +988,8 @@ body.dark .card-memo::before { color: #ffb700; }
   text-align: left;
 }
 .theme-toggle:hover { border-color: var(--accent-light); color: var(--accent); }
+.reset-btn { margin-top: 6px; }
+.reset-btn:hover { border-color: #ef4444; color: #ef4444; }
 
 /* ===== OVERLAY DARKENER ===== */
 .overlay-darkener {
