@@ -14,16 +14,22 @@ function resetProgress() {
 function toggleTheme() {
   const isDark = document.body.classList.toggle('dark');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  document.getElementById('theme-toggle').textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
+  const btn = document.getElementById('theme-toggle');
+  const mBtn = document.getElementById('mobile-theme-btn');
+  if (btn) btn.textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
+  if (mBtn) mBtn.textContent = isDark ? '☀️' : '🌙';
 }
 function applyTheme() {
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-toggle');
+  const mBtn = document.getElementById('mobile-theme-btn');
   if (saved === 'dark') {
     document.body.classList.add('dark');
     if (btn) btn.textContent = '☀️ Светлая тема';
+    if (mBtn) mBtn.textContent = '☀️';
   } else {
     if (btn) btn.textContent = '🌙 Тёмная тема';
+    if (mBtn) mBtn.textContent = '🌙';
   }
 }
 

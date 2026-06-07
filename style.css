@@ -129,7 +129,9 @@ body {
   padding: 4px 8px;
 }
 .mobile-logo { font-weight: 600; color: var(--accent); }
+.mobile-right { display: flex; align-items: center; gap: 10px; }
 .mobile-streak { font-size: 0.85rem; color: var(--text-muted); }
+.mobile-theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1; }
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
