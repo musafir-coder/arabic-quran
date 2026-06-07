@@ -910,7 +910,7 @@ body {
 
 @media (max-width: 768px) {
   .bottom-nav { display: flex; }
-  .sidebar { transform: translateX(-100%); box-shadow: none; width: 260px; }
+  .sidebar { transform: translateX(-100%); box-shadow: none; width: 260px; padding-top: 56px; }
   .sidebar.open { transform: translateX(0); box-shadow: 4px 0 40px rgba(0,0,0,0.25); }
   .mobile-header { display: flex; }
   .main-content {
