@@ -17,7 +17,7 @@ function toggleTheme() {
   const btn = document.getElementById('theme-toggle');
   const mBtn = document.getElementById('mobile-theme-btn');
   if (btn) btn.textContent = isDark ? '☀️ Светлая тема' : '🌙 Тёмная тема';
-  if (mBtn) mBtn.textContent = isDark ? '☀️' : '🌙';
+  if (mBtn) mBtn.textContent = isDark ? '☀️ Светлая' : '🌙 Тёмная';
 }
 function applyTheme() {
   const saved = localStorage.getItem('theme');
@@ -26,10 +26,10 @@ function applyTheme() {
   if (saved === 'dark') {
     document.body.classList.add('dark');
     if (btn) btn.textContent = '☀️ Светлая тема';
-    if (mBtn) mBtn.textContent = '☀️';
+    if (mBtn) mBtn.textContent = '☀️ Светлая';
   } else {
     if (btn) btn.textContent = '🌙 Тёмная тема';
-    if (mBtn) mBtn.textContent = '🌙';
+    if (mBtn) mBtn.textContent = '🌙 Тёмная';
   }
 }
 

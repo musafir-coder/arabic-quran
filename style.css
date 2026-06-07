@@ -131,7 +131,20 @@ body {
 .mobile-logo { font-weight: 600; color: var(--accent); }
 .mobile-right { display: flex; align-items: center; gap: 10px; }
 .mobile-streak { font-size: 0.85rem; color: var(--text-muted); }
-.mobile-theme-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1; }
+.mobile-theme-btn {
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 4px 10px;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
